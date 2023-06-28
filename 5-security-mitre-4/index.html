@@ -116,86 +116,262 @@
 <li><code class="language-text">Impact</code>: 공격자가 시스템 또는 네트워크에 직접적인 피해를 입히는 전술입니다.</li>
 </ul>
 <hr>
-<h3 id="️-3-initial-access" style="position:relative;"><a href="#%EF%B8%8F-3-initial-access" aria-label="️ 3 initial access permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>⌨️ 3. Initial Access</h3>
-<p>T1189: “Drive-by Compromise”</p>
+<h3 id="️-3-collection" style="position:relative;"><a href="#%EF%B8%8F-3-collection" aria-label="️ 3 collection permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>⌨️ 3. Collection</h3>
+<p>T1560: Archive Collected Data</p>
 <blockquote>
-<p>Drive-by Compromise는 공격자가 사용자를 유해한 웹사이트로 유도하거나, 이미 침해된 웹사이트를 이용해 사용자의 시스템을 감염시키는 기법입니다. 이런 공격을 방어하기 위한 auditd 규칙을 작성하는 것은 쉽지 않습니다. 대부분의 웹 브라우저 활동은 사용자 공간에서 발생하며, 이는 auditd가 직접 모니터링할 수 있는 범위를 벗어납니다. 그래서 웹 브라우징 활동을 보호하기 위해선 보다 종합적인 접근 방법이 필요합니다.</p>
+<p>공격자가 데이터를 압축하는 행동을 모니터링하는 것이 중요합니다. 대표적인 압축 도구인 tar에 대한 실행을 모니터링하는 규칙은 다음과 같습니다:</p>
 </blockquote>
-<p>T1190: “Exploit Public-Facing Application”</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">-w /bin/tar -p x -k archive_tool_execution</code></pre></div>
 <blockquote>
-<p>이 공격 기법은 공격자가 공개적으로 접근 가능한 애플리케이션을 악용하는 것을 의미합니다. 이러한 공격을 방어하기 위한 auditd 규칙은 대상 애플리케이션에 따라 다릅니다. 예를 들어, 웹 서버 소프트웨어인 Apache에 대한 auditd 규칙은 아래와 같이 설정될 수 있습니다:</p>
+<p>이 규칙은 tar 명령이 실행될 때마다 이를 감지하고 archive_tool_execution이라는 키로 이를 로깅합니다.</p>
 </blockquote>
-<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/sbin/httpd <span class="token parameter variable">-p</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-k</span> public_facing_exploit</code></pre></div>
-<p>T1133: “External Remote Services”</p>
+<p>T1123: Audio Capture</p>
 <blockquote>
-<p>이 기법은 공격자가 시스템에 원격으로 접속하기 위해 외부의 원격 서비스를 사용하는 것을 의미합니다. 이런 공격을 감지하기 위한 auditd 규칙 중 하나는 ssh 접근을 모니터링하는 것입니다:</p>
+<p>이 기법은 오디오 데이터를 포착하려는 행동을 감지합니다. 그러나, 이러한 행동을 auditd를 사용하여 모니터링하는 것은 쉽지 않습니다. 이는 일반적으로 더 높은 수준의 애플리케이션 레벨 모니터링이 필요하며, 일반적인 Linux 배포판에서는 표준적인 auditd 구성으로는 이를 수행하기 어렵습니다.</p>
 </blockquote>
-<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/sbin/sshd <span class="token parameter variable">-p</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-k</span> external_remote_service</code></pre></div>
-<p>T1200: “Hardware Additions”</p>
+<p>T1119: Automated Collection</p>
 <blockquote>
-<p>이 기법은 공격자가 물리적 하드웨어를 추가하여 시스템을 공격하는 것을 나타냅니다. 이를 감지하기 위해 USB 장치 연결에 대한 auditd 규칙을 만들 수 있습니다:</p>
+<p>이 기법은 자동화된 스크립트나 도구를 사용해 정보를 수집하는 행동을 감지합니다. 이러한 행동을 감지하기 위해 cron 작업의 생성과 수정을 모니터링하는 규칙은 다음과 같습니다:</p>
 </blockquote>
-<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /dev/ <span class="token parameter variable">-p</span> rwa <span class="token parameter variable">-k</span> hardware_additions</code></pre></div>
-<p>T1566: “Phishing”</p>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /etc/crontab <span class="token parameter variable">-p</span> wa <span class="token parameter variable">-k</span> automated_collection
+<span class="token parameter variable">-w</span> /var/spool/cron <span class="token parameter variable">-p</span> wa <span class="token parameter variable">-k</span> automated_collection</code></pre></div>
+<p>T1115: Clipboard Data</p>
 <blockquote>
-<p>Phishing은 공격자가 사기성 이메일, 웹사이트 등을 통해 사용자의 개인 정보나 신용 정보를 탈취하는 공격 기법입니다. auditd를 이용해 이를 직접적으로 감지하는 것은 어렵습니다. 이메일 클라이언트나 웹 브라우저와 같은 사용자 공간의 활동은 auditd가 모니터링 범위에서 벗어나기 때문입니다.</p>
+<p>클립보드 데이터를 모니터링하는 것은 OS 레벨에서 감지하기 어려울 수 있습니다. 이는 더 높은 수준의 애플리케이션 레벨 모니터링이 필요하며, 일반적인 Linux 배포판에서는 표준적인 auditd 구성으로는 이를 수행하기 어렵습니다.</p>
 </blockquote>
-<p>T1195: “Supply Chain Compromise”</p>
+<p>T1213: Exploitation for Defense Evasion</p>
 <blockquote>
-<p>이 기법은 공급망 침해를 나타냅니다. 공격자는 공급망의 일부인 소프트웨어 개발 환경이나 업데이트 시스템 등을 타깃으로 합니다. auditd 규칙으로 이런 공격을 완전히 차단하기는 어렵지만, 소프트웨어 설치 및 업데이트에 관련된 실행 파일을 모니터링하는 것이 도움이 될 수 있습니다.</p>
+<p>이 기법은 보안 메커니즘을 우회하기 위해 취약점을 악용하는 것을 포함합니다. 이는 감지하기 어려운 기법 중 하나이며, 공격자의 동작을 식별하기 위해서는 보안 커널 모듈이나 IDS/IPS 같은 다른 보안 도구를 활용하는 것이 더 효과적일 수 있습니다.</p>
 </blockquote>
+<p>T1005: Data from Local System</p>
 <blockquote>
-<p>예를 들어, dpkg (Debian 패키지 시스템)을 모니터링하는 auditd 규칙은 다음과 같이 설정될 수 있습니다:</p>
+<p>이 기법은 공격자가 로컬 시스템에서 데이터를 수집하는 것을 포함합니다. find 명령을 감시하여 공격자가 시스템에서 데이터를 찾는 행동을 감지할 수 있습니다:</p>
 </blockquote>
-<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/dpkg <span class="token parameter variable">-p</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-k</span> supply_chain_compromise</code></pre></div>
-<p>T1199: “Trusted Relationship”</p>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/find <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> local_data_collection</code></pre></div>
+<p>T1039: Data from Network Shared Drive</p>
 <blockquote>
-<p>이 기법은 신뢰 관계를 악용하는 공격을 나타냅니다. 공격자는 이미 타깃 네트워크 내부에 액세스한 시스템을 통해 다른 시스템에 공격을 확장합니다. 이를 방지하는 구체적인 auditd 규칙을 제시하기는 어렵습니다. 신뢰 관계를 악용하는 공격은 네트워크 내부에서 일어나기 때문에 이런 동작을 감지하기 위해서는 보다 복잡한 네트워크 모니터링이 필요합니다.</p>
+<p>이 기법은 공격자가 네트워크 공유 드라이브에서 데이터를 수집하는 것을 포함합니다. mount 명령을 감시하여 공격자가 네트워크 공유를 마운트하는 행동을 감지할 수 있습니다:</p>
 </blockquote>
-<p>T1078: “Valid Accounts”</p>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /bin/mount <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> shared_drive_access</code></pre></div>
+<p>T1025: Data from Removable Media</p>
 <blockquote>
-<p>이 기법은 유효한 계정을 이용하는 공격을 나타냅니다. 공격자는 탈취하거나 악용할 수 있는 유효한 계정을 찾아 시스템 또는 서비스에 액세스합니다. 이런 공격을 감지하기 위한 auditd 규칙 중 하나는 /etc/passwd와 /etc/shadow 파일에 대한 변경을 모니터링하는 것입니다. 이 파일들에는 시스템의 사용자 계정과 암호화된 비밀번호가 저장되어 있습니다.</p>
+<p>이 기법은 공격자가 이동식 미디어에서 데이터를 수집하는 것을 포함합니다. USB 장치를 모니터링하여 이동식 미디어의 사용을 감지할 수 있습니다:</p>
 </blockquote>
-<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">
-<span class="token parameter variable">-w</span> /etc/passwd <span class="token parameter variable">-p</span> wa <span class="token parameter variable">-k</span> valid_accounts
-<span class="token parameter variable">-w</span> /etc/shadow <span class="token parameter variable">-p</span> wa <span class="token parameter variable">-k</span> valid_accounts</code></pre></div>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /dev/sd* <span class="token parameter variable">-p</span> rxa <span class="token parameter variable">-k</span> removable_media</code></pre></div>
+<p>T1074: Data Staged</p>
 <blockquote>
-<p>이 규칙들은 /etc/passwd와 /etc/shadow 파일에 대한 write (w)와 attribute change (a)를 모니터링하며, 이벤트를 ‘valid_accounts’ 키와 함께 로깅합니다</p>
+<p>이 기법은 공격자가 훔친 데이터를 한 곳에 모으는 것을 포함합니다. 임시 디렉토리를 모니터링하여 공격자가 데이터를 모으는 행동을 감지할 수 있습니다:</p>
 </blockquote>
-<h3 id="️-4execution" style="position:relative;"><a href="#%EF%B8%8F-4execution" aria-label="️ 4execution permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>⌨️ 4.Execution</h3>
-<p>T1059: “Command and Scripting Interpreter: PowerShell”</p>
-<p>PowerShell은 시스템 관리와 자동화를 위한 강력한 명령어 셸과 스크립팅 언어 환경입니다. 이는 공격자가 시스템에 액세스하고, 내부에서 작업을 수행하기 위한 방법으로도 사용될 수 있습니다. 이런 활동을 감지하기 위한 auditd 규칙 중 하나는 PowerShell 실행을 모니터링하는 것입니다:</p>
-<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/powershell <span class="token parameter variable">-p</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-k</span> powershell_execution</code></pre></div>
-<p>T1203: “Exploit for Client Execution”</p>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /tmp/ <span class="token parameter variable">-p</span> wa <span class="token parameter variable">-k</span> data_staging</code></pre></div>
+<p>T1114: Email Collection</p>
 <blockquote>
-<p>이 기법은 공격자가 클라이언트 소프트웨어 취약점을 악용하여 코드를 실행하는 것을 나타냅니다. 이를 방어하기 위한 특정 auditd 규칙을 설정하기는 어렵습니다. 이는 대상 클라이언트 소프트웨어와 그 취약점에 따라 달라지기 때문입니다.</p>
+<p>이 기법은 공격자가 이메일을 수집하는 것을 포함합니다. 이메일 관련 파일의 액세스를 모니터링하여 이메일 수집 행동을 감지할 수 있습니다:</p>
 </blockquote>
-<p>T1559: “Inter-Process Communication: Dynamic Data Exchange”</p>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /var/mail/ <span class="token parameter variable">-p</span> rxa <span class="token parameter variable">-k</span> email_access
+<span class="token parameter variable">-w</span> /var/spool/mail/ <span class="token parameter variable">-p</span> rxa <span class="token parameter variable">-k</span> email_access</code></pre></div>
+<p>T1113: Screen Capture</p>
 <blockquote>
-<p>Dynamic Data Exchange (DDE)는 프로세스 간에 데이터를 공유하고 통신하는 기법입니다. DDE는 윈도우 환경에서 주로 사용되는데, 이를 감지하기 위한 Linux의 auditd 규칙을 제시하기는 어렵습니다.</p>
+<p>이 기법은 공격자가 사용자의 스크린 캡처를 수집하는 것을 포함합니다. xwd, import와 같은 명령어를 감시하여 스크린 캡처 시도를 감지할 수 있습니다:</p>
 </blockquote>
-<p>T1106: “Native API”</p>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/xwd <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> screen_capture
+<span class="token parameter variable">-w</span> /usr/bin/import <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> screen_capture</code></pre></div>
+<p>T1125: Video Capture</p>
 <blockquote>
-<p>Native API는 운영 체제에서 제공하는 API를 직접 사용하는 기법을 나타냅니다. 이를 감지하는 구체적인 auditd 규칙을 작성하기는 어렵습니다. Native API는 매우 광범위하며, 일반적인 시스템 작업에도 사용됩니다.</p>
+<p>이 기법은 공격자가 비디오를 캡처하는 것을 포함합니다. ffmpeg, recordmydesktop와 같은 도구를 감시하여 비디오 캡처 시도를 감지할 수 있습니다:</p>
 </blockquote>
-<p>T1053: “Scheduled Task/Job”</p>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/ffmpeg <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> video_capture
+<span class="token parameter variable">-w</span> /usr/bin/recordmydesktop <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> video_capture</code></pre></div>
+<h3 id="️-3-exfiltration" style="position:relative;"><a href="#%EF%B8%8F-3-exfiltration" aria-label="️ 3 exfiltration permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>⌨️ 3. Exfiltration</h3>
+<p>T1071: Application Layer Protocol</p>
 <blockquote>
-<p>공격자는 계획된 작업 또는 잡을 사용하여 유해한 프로그램을 실행할 수 있습니다. 이를 감지하기 위한 auditd 규칙 중 하나는 cron 작업을 모니터링하는 것입니다:</p>
+<p>이 기법은 공격자가 응용 프로그램 계층 프로토콜을 이용하는 것을 포함합니다. SSH, FTP 같은 애플리케이션 계층 프로토콜의 사용을 감지하기 위해 이러한 서비스에 대한 실행을 모니터링할 수 있습니다:</p>
 </blockquote>
-<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /etc/crontab <span class="token parameter variable">-p</span> wa <span class="token parameter variable">-k</span> scheduled_task
-<span class="token parameter variable">-w</span> /var/spool/cron <span class="token parameter variable">-k</span> scheduled_task</code></pre></div>
-<p>T1072: “Software Deployment Tools”</p>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/ssh <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> app_layer_protocol
+<span class="token parameter variable">-w</span> /usr/bin/ftp <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> app_layer_protocol</code></pre></div>
+<p>T1092: Communication Through Removable Media</p>
 <blockquote>
-<p>공격자는 소프트웨어 배포 도구를 악용하여 시스템에 악성 코드를 배포할 수 있습니다. 이를 감지하기 위한 auditd 규칙은 대상 소프트웨어 배포 도구에 따라 다르게 설정됩니다.</p>
+<p>이 기법은 공격자가 이동식 미디어를 통해 데이터를 전송하는 것을 포함합니다. USB 장치를 모니터링하여 이동식 미디어의 사용을 감지할 수 있습니다:</p>
 </blockquote>
-<p>T1569: “System Services”</p>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /dev/sd* <span class="token parameter variable">-p</span> rwa <span class="token parameter variable">-k</span> removable_media</code></pre></div>
+<p>T1132: Data Encoding</p>
 <blockquote>
-<p>공격자는 시스템 서비스를 악용하여 지속성을 확보하거나 권한 상승을 시도할 수 있습니다. 이를 감지하기 위한 auditd 규칙은 대상 시스템 서비스에 따라 다르게 설정됩니다.</p>
+<p>이 기법은 공격자가 데이터를 인코딩하는 것을 포함합니다. base64와 같은 인코딩 도구를 감시하여 데이터 인코딩 시도를 감지할 수 있습니다:</p>
 </blockquote>
-<p>T1204: “User Execution”</p>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/base64 <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> data_encoding</code></pre></div>
+<p>T1001: Data Obfuscation:</p>
 <blockquote>
-<p>사용자 실행은 공격자가 사용자에게 파일이나 링크를 클릭하도록 유도하는 기법을 나타냅니다. 이를 방어하기 위한 특정 auditd 규칙을 설정하기는 어렵습니다. 이는 사용자의 입력에 의존하는 작업이며 auditd의 감시 범위를 벗어나는 경우가 많습니다.</p>
+<p>이 기법은 공격자가 데이터를 난해하게 만드는 것을 포함합니다. base64와 같은 인코딩 도구를 감시하여 데이터 오브스케이션 시도를 감지할 수 있습니다:</p>
 </blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/base64 <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> data_obfuscation</code></pre></div>
+<p>T1568: Dynamic Resolution</p>
+<blockquote>
+<p>이 기법은 공격자가 도메인 생성 알고리즘(DGA)을 사용하는 것을 포함합니다. 보통 이는 네트워크 트래픽에서 감지되기 쉬우나, 많은 DNS 요청을 하는 도구에 대한 모니터링을 통해 감지할 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/dig <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> dynamic_resolution
+<span class="token parameter variable">-w</span> /usr/bin/nslookup <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> dynamic_resolution</code></pre></div>
+<p>T1573: Encrypted Channel</p>
+<blockquote>
+<p>이 기법은 공격자가 암호화된 채널을 사용하는 것을 포함합니다. 이것은 일반적으로 네트워크 트래픽 분석을 통해 감지되지만, 암호화 도구의 사용을 감시하여 어느 정도 감지할 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/openssl <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> encrypted_channel</code></pre></div>
+<p>T1008: Fallback Channels</p>
+<blockquote>
+<p>이 기법은 공격자가 통신이 차단되면 대체 채널로 전환하는 것을 포함합니다. 이것은 일반적으로 네트워크 트래픽 분석을 통해 감지되지만, 다양한 네트워크 도구의 사용을 모니터링하여 감지할 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/nc <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> fallback_channel
+<span class="token parameter variable">-w</span> /usr/bin/curl <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> fallback_channel</code></pre></div>
+<p>T1105: Remote File Copy</p>
+<blockquote>
+<p>이 기법은 공격자가 원격 파일 복사를 수행하는 것을 포함합니다. scp, sftp, wget, curl과 같은 파일 전송 도구를 감시하여 원격 파일 복사를 감지할 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/scp <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> remote_file_copy
+<span class="token parameter variable">-w</span> /usr/bin/sftp <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> remote_file_copy
+<span class="token parameter variable">-w</span> /usr/bin/wget <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> remote_file_copy
+<span class="token parameter variable">-w</span> /usr/bin/curl <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> remote_file_copy</code></pre></div>
+<p>T1104: Multi-Stage Channels</p>
+<blockquote>
+<p>이 기법은 공격자가 공격을 여러 단계로 나누어 통신하는 것을 포함합니다. 이 기법을 직접적으로 감지하는 것은 어렵습니다. 그러나, 여러 네트워킹 도구들의 사용을 감시함으로써 관련 활동을 일부 감지할 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/nc <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> multi_stage_channels
+<span class="token parameter variable">-w</span> /usr/bin/curl <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> multi_stage_channels</code></pre></div>
+<p>T1095: Non-Application Layer Protocol</p>
+<blockquote>
+<p>이 기법은 공격자가 애플리케이션 계층 프로토콜이 아닌 다른 프로토콜을 사용하는 것을 포함합니다. 이것은 일반적으로 네트워크 트래픽 분석을 통해 감지되지만, 특정 소켓 생성 도구의 사용을 감시함으로써 감지할 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/nc <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> non_application_layer_protocol</code></pre></div>
+<p>T1571: Non-Standard Port</p>
+<blockquote>
+<p>이 기법은 공격자가 표준이 아닌 포트를 사용하는 것을 포함합니다. 표준이 아닌 포트에서의 네트워크 활동은 일반적으로 네트워크 모니터링을 통해 감지되지만, 특정 네트워크 도구를 감시하여 감지할 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/nc <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> non_standard_port</code></pre></div>
+<p>T1572: Protocol Tunneling</p>
+<blockquote>
+<p>이 기법은 공격자가 프로토콜 터널링을 사용하는 것을 포함합니다. 이는 통상적으로 네트워크 트래픽 분석을 통해 감지되지만, 터널링 도구를 감시하여 어느 정도 감지할 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/ssh <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> protocol_tunneling</code></pre></div>
+<p>T1090: Proxy</p>
+<blockquote>
+<p>이 기법은 공격자가 네트워크 트래픽을 프록시 서버를 통해 전송하는 것을 포함합니다. 특정 프록시 도구의 사용을 감시하여 일부 활동을 감지할 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/proxychains <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> proxy
+<span class="token parameter variable">-w</span> /usr/sbin/sshd <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> proxy</code></pre></div>
+<p>T1219: Remote Access Tools</p>
+<blockquote>
+<p>이 기법은 공격자가 원격 액세스 도구(RAT)를 사용하여 시스템에 액세스하는 것을 포함합니다. 이 기법을 직접적으로 감지하는 것은 어렵습니다. 그러나, RAT를 설치하거나 실행하는데 사용할 수 있는 다양한 시스템 유틸리티를 감시함으로써 관련 활동을 일부 감지할 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/nc <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> remote_access_tools
+<span class="token parameter variable">-w</span> /usr/bin/ssh <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> remote_access_tools
+<span class="token parameter variable">-w</span> /usr/sbin/sshd <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> remote_access_tools</code></pre></div>
+<p>T1102: Web Service</p>
+<blockquote>
+<p>이 기법은 공격자가 웹 서비스를 사용하여 정보를 전송하거나 C2 통신을 수행하는 것을 포함합니다. 이 기법을 감지하는 것은 어렵습니다. 그러나, 웹 서비스에 접근하는데 사용되는 명령어를 감시하여 일부 활동을 감지할 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/curl <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> web_service
+<span class="token parameter variable">-w</span> /usr/bin/wget <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> web_service</code></pre></div>
+<h3 id="️-4-command-and-control" style="position:relative;"><a href="#%EF%B8%8F-4-command-and-control" aria-label="️ 4 command and control permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>⌨️ 4. Command and Control</h3>
+<p>T1020: Automated Exfiltration</p>
+<blockquote>
+<p>이 기법은 공격자가 자동화된 방법을 사용하여 데이터를 추출하는 것을 포함합니다. 이 기법을 감지하는 것은 매우 어려우며, 특정한 예제 auditd 규칙은 제공하기 어렵습니다. 그러나 네트워크 트래픽 모니터링, 이상 징후 탐지 등을 통해 감지를 시도할 수 있습니다.</p>
+</blockquote>
+<p>T1030: Data Transfer Size Limits</p>
+<blockquote>
+<p>공격자가 데이터 추출량을 제한하는 것을 포함합니다. 이를 감지하는 것은 매우 어렵고, 이 기법을 감지하기 위한 특정 auditd 규칙을 제시하는 것은 불가능합니다.</p>
+</blockquote>
+<p>T1048: Exfiltration Over Alternative Protocol</p>
+<blockquote>
+<p>이 기법은 공격자가 표준 프로토콜 이외의 것을 사용하여 데이터를 추출하는 것을 포함합니다. 이 기법을 직접 감지하는 것은 어렵지만, 네트워크 트래픽 분석을 통해 이상한 트래픽을 감지하는 것이 가능할 수 있습니다.</p>
+</blockquote>
+<p>T1041: Exfiltration Over Command and Control Channel</p>
+<blockquote>
+<p>이 기법은 공격자가 명령 및 제어 채널을 통해 데이터를 추출하는 것을 포함합니다. 이 기법을 직접 감지하는 것은 어렵지만, C2 통신을 감지하거나 분석하는데 사용되는 도구나 방법을 이용하여 감지가 가능할 수 있습니다.</p>
+</blockquote>
+<p>T1011: Exfiltration Over Other Network Medium</p>
+<blockquote>
+<p>이 기법은 공격자가 TCP/IP 네트워크 외의 다른 네트워크 매체를 통해 데이터를 추출하는 것을 포함합니다. 이 기법을 직접적으로 감지하는 것은 어렵습니다.</p>
+</blockquote>
+<p>T1052: Exfiltration Over Physical Medium</p>
+<blockquote>
+<p>이 기법은 공격자가 물리적 매체(예: USB 드라이브)를 통해 데이터를 추출하는 것을 포함합니다. USB 장치의 사용을 추적하려면 다음과 같은 auditd 규칙을 사용할 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /dev/ <span class="token parameter variable">-p</span> wa <span class="token parameter variable">-k</span> usb
+<span class="token parameter variable">-w</span> /media/ <span class="token parameter variable">-p</span> wa <span class="token parameter variable">-k</span> usb
+<span class="token parameter variable">-w</span> /mnt/ <span class="token parameter variable">-p</span> wa <span class="token parameter variable">-k</span> usb</code></pre></div>
+<p>T1567: Exfiltration Over Web Service</p>
+<blockquote>
+<p>이 기법은 공격자가 웹 서비스를 이용해 데이터를 추출하는 것을 포함합니다. 이 기법을 감지하기 위한 특정 auditd 규칙을 제공하기는 어렵습니다. 대신에, HTTP 트래픽을 모니터링하거나 알려진 악성 도메인에 대한 접근을 탐지하는 방법을 사용해야 할 수 있습니다.</p>
+</blockquote>
+<p>T1029: Scheduled Transfer</p>
+<blockquote>
+<p>이 기법은 공격자가 데이터 전송을 스케줄링하는 것을 포함합니다. 이 기법은 특정한 스케줄링 도구를 사용하기 때문에, 그 도구의 사용을 모니터링하는 것으로 감지를 시도할 수 있습니다. 예를 들어, cron을 모니터링하기 위한 규칙은 다음과 같습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /etc/crontab <span class="token parameter variable">-p</span> wa <span class="token parameter variable">-k</span> <span class="token function">cron</span>
+<span class="token parameter variable">-w</span> /etc/cron.*/ <span class="token parameter variable">-p</span> wa <span class="token parameter variable">-k</span> <span class="token function">cron</span></code></pre></div>
+<h3 id="️-5-impact" style="position:relative;"><a href="#%EF%B8%8F-5-impact" aria-label="️ 5 impact permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>⌨️ 5. Impact</h3>
+<p>T1531: Account Access Removal: 이 기법은 공격자가 사용자 계정에 대한 액세스를 제거하는 것을 포함합니다. 이를 감지하기 위한 auditd 규칙은 다음과 같습니다:</p>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/sbin/userdel <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> account_deletion
+<span class="token parameter variable">-w</span> /usr/sbin/deluser <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> account_deletion
+<span class="token parameter variable">-a</span> always,exit <span class="token parameter variable">-F</span> <span class="token assign-left variable">arch</span><span class="token operator">=</span>b64 <span class="token parameter variable">-S</span> setreuid <span class="token parameter variable">-k</span> setreuid
+<span class="token parameter variable">-a</span> always,exit <span class="token parameter variable">-F</span> <span class="token assign-left variable">arch</span><span class="token operator">=</span>b32 <span class="token parameter variable">-S</span> setreuid <span class="token parameter variable">-k</span> setreuid</code></pre></div>
+<p>T1485: Data Destruction</p>
+<blockquote>
+<p>이 기법은 공격자가 시스템에서 데이터를 파괴하는 것을 포함합니다. 파일을 삭제하는 rm 명령을 감지하는 auditd 규칙은 다음과 같습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-a</span> exit,always <span class="token parameter variable">-F</span> <span class="token assign-left variable">path</span><span class="token operator">=</span>/bin/rm <span class="token parameter variable">-F</span> <span class="token assign-left variable">perm</span><span class="token operator">=</span>x <span class="token parameter variable">-F</span> auid<span class="token operator">>=</span><span class="token number">1000</span> <span class="token parameter variable">-k</span> delete</code></pre></div>
+<p>T1486: Data Encrypted for Impact</p>
+<blockquote>
+<p>이 기법은 공격자가 악성 소프트웨어(예: 랜섬웨어)를 사용하여 시스템 데이터를 암호화하는 것을 포함합니다. 일반적으로 auditd는 암호화된 파일의 내용을 직접 탐지할 수 없지만, 특정 암호화 도구가 사용되었다면, 이 도구에 대한 system call을 모니터링할 수 있습니다. 예를 들어, openssl 도구 사용을 모니터링하려면 다음과 같은 규칙을 사용할 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/bin/openssl <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> openssl_use</code></pre></div>
+<p>T1565: Data Manipulation</p>
+<blockquote>
+<p>이 기법은 공격자가 데이터 무결성을 손상시키기 위해 시스템 데이터를 조작하는 것을 포함합니다. 이를 감지하기 위한 특정한 auditd 규칙은 없습니다. 그러나 파일 변경을 모니터링하거나 알려진 데이터 조작 도구의 사용을 모니터링하는 것이 도움이 될 수 있습니다.</p>
+</blockquote>
+<p>T1491: Defacement</p>
+<blockquote>
+<p>이 기법은 공격자가 웹사이트의 보이는 내용을 변경하는 것을 포함합니다. 이 기법을 감지하기 위한 auditd 규칙은 웹 서버의 HTML 파일에 대한 변경을 모니터링하는 것일 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /var/www/ <span class="token parameter variable">-p</span> wa <span class="token parameter variable">-k</span> web_defacement</code></pre></div>
+<p>T1561: Disk Content Wipe</p>
+<blockquote>
+<p>이 기법은 공격자가 디스크의 내용을 삭제하는 것을 포함합니다. 이를 감지하기 위한 auditd 규칙은 디스크 삭제 도구에 대한 system call을 모니터링하는 것일 수 있습니다. 예를 들어, dd 도구 사용을 모니터링하려면 다음과 같은 규칙을 사용할 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /bin/dd <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> disk_wipe</code></pre></div>
+<p>T1499: Endpoint Denial of Service</p>
+<blockquote>
+<p>이 기법은 공격자가 시스템의 가용성을 저해하는 것을 포함합니다. 이 기법을 감지하기 위한 auditd 규칙은 특정 자원에 대한 접근 빈도를 모니터링하는 것일 수 있습니다. 그러나, 이러한 유형의 공격은 보통 네트워크 레벨에서 감지되므로, IDS/IPS 시스템이 더 효과적일 수 있습니다.</p>
+</blockquote>
+<p>T1495: Firmware Corruption</p>
+<blockquote>
+<p>이 기법은 공격자가 시스템의 펌웨어를 손상시키는 것을 포함합니다. 펌웨어 수정은 특수한 권한을 필요로 하기 때문에, 관련된 유틸리티에 대한 실행을 감지하는 것이 가능하다. 예를 들어, flashrom이라는 펌웨어 플래싱 도구에 대한 사용을 모니터링할 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /usr/sbin/flashrom <span class="token parameter variable">-p</span> x <span class="token parameter variable">-k</span> firmware_modification</code></pre></div>
+<p>T1490: Inhibit System Recovery</p>
+<blockquote>
+<p>이 기법은 공격자가 시스템 복구 절차를 방해하는 것을 포함합니다. 예를 들어, 공격자는 시스템 백업을 삭제하거나 변경할 수 있습니다. 따라서, 백업 관련 파일이나 프로세스에 대한 변경을 모니터링하면 이 기법을 감지하는 데 도움이 될 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-w</span> /path/to/backup <span class="token parameter variable">-p</span> wa <span class="token parameter variable">-k</span> backup_modification</code></pre></div>
+<p>T1498: Network Denial of Service</p>
+<blockquote>
+<p>이 기법은 공격자가 네트워크 자원의 가용성을 저해하는 것을 포함합니다. 그러나 이러한 공격은 일반적으로 네트워크 레벨에서 감지되므로, IDS/IPS 시스템 등이 더 효과적일 수 있습니다. auditd는 이러한 유형의 공격을 직접 탐지하는데 유용하지 않을 수 있습니다.</p>
+</blockquote>
+<p>T1496: Resource Hijacking</p>
+<blockquote>
+<p>이 기법은 공격자가 컴퓨팅 리소스를 무단으로 사용하는 것을 포함합니다. 이는 보통 크립토커런시 마이닝과 같은 작업을 위해 사용됩니다. auditd를 사용해 특정 마이닝 도구의 사용을 모니터링할 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">-w /path/to/mining/tool -p x -k resource_hijacking</code></pre></div>
+<p>T1489: Service Stop</p>
+<blockquote>
+<p>이 기법은 공격자가 시스템 서비스를 중지시키는 것을 포함합니다. 서비스 중지는 일반적으로 systemctl이나 service 명령어를 통해 수행되므로, 이 명령어들의 사용을 감지할 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-a</span> always,exit <span class="token parameter variable">-F</span> <span class="token assign-left variable">path</span><span class="token operator">=</span>/usr/sbin/service <span class="token parameter variable">-F</span> <span class="token assign-left variable">perm</span><span class="token operator">=</span>x <span class="token parameter variable">-k</span> service_stop
+<span class="token parameter variable">-a</span> always,exit <span class="token parameter variable">-F</span> <span class="token assign-left variable">path</span><span class="token operator">=</span>/usr/bin/systemctl <span class="token parameter variable">-F</span> <span class="token assign-left variable">perm</span><span class="token operator">=</span>x <span class="token parameter variable">-k</span> service_stop</code></pre></div>
+<p>T1529: System Shutdown/Reboot</p>
+<blockquote>
+<p>이 기법은 공격자가 시스템을 종료하거나 재부팅하는 것을 포함합니다. shutdown, reboot, poweroff 등의 명령어가 사용되므로, 이 명령어들의 사용을 감지할 수 있습니다:</p>
+</blockquote>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token parameter variable">-a</span> always,exit <span class="token parameter variable">-F</span> <span class="token assign-left variable">path</span><span class="token operator">=</span>/usr/sbin/shutdown <span class="token parameter variable">-F</span> <span class="token assign-left variable">perm</span><span class="token operator">=</span>x <span class="token parameter variable">-k</span> system_shutdown_reboot
+<span class="token parameter variable">-a</span> always,exit <span class="token parameter variable">-F</span> <span class="token assign-left variable">path</span><span class="token operator">=</span>/usr/sbin/reboot <span class="token parameter variable">-F</span> <span class="token assign-left variable">perm</span><span class="token operator">=</span>x <span class="token parameter variable">-k</span> system_shutdown_reboot
+<span class="token parameter variable">-a</span> always,exit <span class="token parameter variable">-F</span> <span class="token assign-left variable">path</span><span class="token operator">=</span>/usr/sbin/poweroff <span class="token parameter variable">-F</span> <span class="token assign-left variable">perm</span><span class="token operator">=</span>x <span class="token parameter variable">-k</span> system_shutdown_reboot</code></pre></div>
 <hr>
 <h3 id="참고사이트" style="position:relative;"><a href="#%EC%B0%B8%EA%B3%A0%EC%82%AC%EC%9D%B4%ED%8A%B8" aria-label="참고사이트 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>참고사이트</h3>
 <blockquote>
@@ -213,10 +389,12 @@
 <li>
 <p><a href="#-2-12%EA%B0%9C-tactics-%EC%A0%84%EC%88%A0br">🟡 2. 12개 Tactics 전술<br></a></p>
 <ul>
-<li><a href="#%EF%B8%8F-3-initial-access">⌨️ 3. Initial Access</a></li>
-<li><a href="#%EF%B8%8F-4execution">⌨️ 4.Execution</a></li>
+<li><a href="#%EF%B8%8F-3-collection">⌨️ 3. Collection</a></li>
+<li><a href="#%EF%B8%8F-3-exfiltration">⌨️ 3. Exfiltration</a></li>
+<li><a href="#%EF%B8%8F-4-command-and-control">⌨️ 4. Command and Control</a></li>
+<li><a href="#%EF%B8%8F-5-impact">⌨️ 5. Impact</a></li>
 <li><a href="#%EC%B0%B8%EA%B3%A0%EC%82%AC%EC%9D%B4%ED%8A%B8">참고사이트</a></li>
 </ul>
 </li>
 </ul>
-</div></div></div><div class="post-navigator"><div class="post-navigator-card-wrapper"><a class="post-card prev" href="/5-security-mitre-3/"><div class="direction">이전 글</div><div class="title">[보안]  ATT&amp;CK - Linux 공격기법 정리 (3)</div></a></div><div class="post-navigator-card-wrapper"><a class="post-card next" href="/5-security-mitre-5/"><div class="direction">다음 글</div><div class="title">[보안]  ATT&amp;CK - Linux 공격기법 정리 (5)</div></a></div></div></main><footer class="page-footer-wrapper"><p class="page-footer">© <!-- -->2023<!-- --> <a href="https://github.com/leesoobin">이수빈</a> powered by<a href="https://github.com/zoomKoding/zoomkoding-gatsby-blog"> zoomkoding-gatsby-blog</a></p></footer><div class="dark-mode-button-wrapper"><button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium dark-mode-button css-1yxmbwk" tabindex="0" type="button"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge dark-mode-icon css-6flbmm" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="DarkModeIcon"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path></svg></button></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/5-security-mitre-4/";window.___webpackCompilationHash="1462efb72940da6430d0";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-f196834924f88edde8fc.js"],"app":["/app-c50b4886e8df101ab8c6.js"],"component---cache-caches-gatsby-plugin-offline-app-shell-js":["/component---cache-caches-gatsby-plugin-offline-app-shell-js-12b5d8159c7e67968cd6.js"],"component---src-pages-404-js":["/component---src-pages-404-js-29258485103e835516fd.js"],"component---src-pages-about-js":["/component---src-pages-about-js-e85b70281ebbcd61b432.js"],"component---src-pages-index-js":["/component---src-pages-index-js-02698fe531e86750398f.js"],"component---src-templates-blog-template-js":["/component---src-templates-blog-template-js-2b0521eff6d4e80c8984.js"],"component---src-templates-category-template-js":["/component---src-templates-category-template-js-addefa15e14ce4af818f.js"]};/*]]>*/</script><script src="/polyfill-f196834924f88edde8fc.js" nomodule=""></script><script src="/app-c50b4886e8df101ab8c6.js" async=""></script><script src="/framework-de157c6b30d4790e4e81.js" async=""></script><script src="/webpack-runtime-e3d04de75164d5f06c69.js" async=""></script></body></html>
+</div></div></div><div class="post-navigator"><div class="post-navigator-card-wrapper"><a class="post-card prev" href="/5-security-mitre-3/"><div class="direction">이전 글</div><div class="title">[보안]  ATT&amp;CK - Linux 공격기법 정리 (3)</div></a></div><div class="post-navigator-card-wrapper"></div></div></main><footer class="page-footer-wrapper"><p class="page-footer">© <!-- -->2023<!-- --> <a href="https://github.com/leesoobin">이수빈</a> powered by<a href="https://github.com/zoomKoding/zoomkoding-gatsby-blog"> zoomkoding-gatsby-blog</a></p></footer><div class="dark-mode-button-wrapper"><button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium dark-mode-button css-1yxmbwk" tabindex="0" type="button"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge dark-mode-icon css-6flbmm" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="DarkModeIcon"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path></svg></button></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/5-security-mitre-4/";window.___webpackCompilationHash="1462efb72940da6430d0";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-f196834924f88edde8fc.js"],"app":["/app-c50b4886e8df101ab8c6.js"],"component---cache-caches-gatsby-plugin-offline-app-shell-js":["/component---cache-caches-gatsby-plugin-offline-app-shell-js-12b5d8159c7e67968cd6.js"],"component---src-pages-404-js":["/component---src-pages-404-js-29258485103e835516fd.js"],"component---src-pages-about-js":["/component---src-pages-about-js-e85b70281ebbcd61b432.js"],"component---src-pages-index-js":["/component---src-pages-index-js-02698fe531e86750398f.js"],"component---src-templates-blog-template-js":["/component---src-templates-blog-template-js-2b0521eff6d4e80c8984.js"],"component---src-templates-category-template-js":["/component---src-templates-category-template-js-addefa15e14ce4af818f.js"]};/*]]>*/</script><script src="/polyfill-f196834924f88edde8fc.js" nomodule=""></script><script src="/app-c50b4886e8df101ab8c6.js" async=""></script><script src="/framework-de157c6b30d4790e4e81.js" async=""></script><script src="/webpack-runtime-e3d04de75164d5f06c69.js" async=""></script></body></html>
