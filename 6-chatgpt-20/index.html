@@ -143,24 +143,6 @@
 <p>이 아웃라인을 활용하여 자신만의 글을 작성해보세요!</p>
 <h2 id="-1-소개" style="position:relative;"><a href="#-1-%EC%86%8C%EA%B0%9C" aria-label=" 1 소개 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>🔵 1. 소개</h2>
 <h3 id="--audit-log의-중요성과-데이터-마이닝의-필요성-소개" style="position:relative;"><a href="#--audit-log%EC%9D%98-%EC%A4%91%EC%9A%94%EC%84%B1%EA%B3%BC-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%A7%88%EC%9D%B4%EB%8B%9D%EC%9D%98-%ED%95%84%EC%9A%94%EC%84%B1-%EC%86%8C%EA%B0%9C" aria-label="  audit log의 중요성과 데이터 마이닝의 필요성 소개 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>- Audit log의 중요성과 데이터 마이닝의 필요성 소개</h3>
-<p>http: panic serving 45.95.146.77:32832: runtime error: index out of range [0] with length 0
-goroutine 3357 [running]:
-net/http.(*conn).serve.func1()
-/usr/local/go/src/net/http/server.go:1854 +0xbf
-panic({0x12dcd40, 0xc0000b6000})
-/usr/local/go/src/runtime/panic.go:890 +0x263
-main.main.func1({0x0?, 0x3b?}, 0xc000162000)
-/Users/kakaobank/go/src/chat-blog-maker/main.go:34 +0x24d
-net/http.HandlerFunc.ServeHTTP(0x1699b88?, {0x1375e60?, 0xc0001980e0?}, 0x100cca8?)
-/usr/local/go/src/net/http/server.go:2122 +0x2f
-net/http.(*ServeMux).ServeHTTP(0x0?, {0x1375e60, 0xc0001980e0}, 0xc000162000)
-/usr/local/go/src/net/http/server.go:2500 +0x149
-net/http.serverHandler.ServeHTTP({0xc0002040c0?}, {0x1375e60, 0xc0001980e0}, 0xc000162000)
-/usr/local/go/src/net/http/server.go:2936 +0x316
-net/http.(*conn).serve(0xc000284090, {0x1376028, 0xc000098de0})
-/usr/local/go/src/net/http/server.go:1995 +0x612
-created by net/http.(*Server).Serve
-/usr/local/go/src/net/http/server.go:3089 +0x5ed</p>
 <blockquote>
 <p>Audit log은 시스템 또는 네트워크에서 발생하는 모든 이벤트 및 활동을 기록하는 보안 도구입니다. 주요 목적은 시스템의 보안 및 규정 준수를 강화하고, 잠재적인 보안 위협에 대비하는 것입니다.</p>
 </blockquote>
@@ -267,24 +249,6 @@ created by net/http.(*Server).Serve
 <hr>
 <h2 id="-4-word-to-vector를-활용한-audit-log-분석-사례-연구" style="position:relative;"><a href="#-4-word-to-vector%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-audit-log-%EB%B6%84%EC%84%9D-%EC%82%AC%EB%A1%80-%EC%97%B0%EA%B5%AC" aria-label=" 4 word to vector를 활용한 audit log 분석 사례 연구 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>🔵 4. Word to Vector를 활용한 Audit Log 분석 사례 연구</h2>
 <h3 id="--실제로-word-to-vector를-적용하여-분석한-예시-사례-제시" style="position:relative;"><a href="#--%EC%8B%A4%EC%A0%9C%EB%A1%9C-word-to-vector%EB%A5%BC-%EC%A0%81%EC%9A%A9%ED%95%98%EC%97%AC-%EB%B6%84%EC%84%9D%ED%95%9C-%EC%98%88%EC%8B%9C-%EC%82%AC%EB%A1%80-%EC%A0%9C%EC%8B%9C" aria-label="  실제로 word to vector를 적용하여 분석한 예시 사례 제시 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>- 실제로 Word to Vector를 적용하여 분석한 예시 사례 제시</h3>
-<p>http: panic serving 45.95.147.254:44950: runtime error: index out of range [0] with length 0
-goroutine 3457 [running]:
-net/http.(*conn).serve.func1()
-/usr/local/go/src/net/http/server.go:1854 +0xbf
-panic({0x12dcd40, 0xc000026108})
-/usr/local/go/src/runtime/panic.go:890 +0x263
-main.main.func1({0x0?, 0x3b?}, 0xc0001aa000)
-/Users/kakaobank/go/src/chat-blog-maker/main.go:34 +0x24d
-net/http.HandlerFunc.ServeHTTP(0xc000154080?, {0x1375e60?, 0xc0001980e0?}, 0x100cca8?)
-/usr/local/go/src/net/http/server.go:2122 +0x2f
-net/http.(*ServeMux).ServeHTTP(0x0?, {0x1375e60, 0xc0001980e0}, 0xc0001aa000)
-/usr/local/go/src/net/http/server.go:2500 +0x149
-net/http.serverHandler.ServeHTTP({0xc0001800f0?}, {0x1375e60, 0xc0001980e0}, 0xc0001aa000)
-/usr/local/go/src/net/http/server.go:2936 +0x316
-net/http.(*conn).serve(0xc000284090, {0x1376028, 0xc000098de0})
-/usr/local/go/src/net/http/server.go:1995 +0x612
-created by net/http.(*Server).Serve
-/usr/local/go/src/net/http/server.go:3089 +0x5ed</p>
 <blockquote>
 <p>Word to Vector는 단어를 벡터로 표현하는 방법으로, 단어 간의 유사도를 계산하거나 단어의 의미를 이해하는 데 활용됩니다. 이를 실제로 적용하여 분석한 예시 사례는 다양한 분야에서 발견할 수 있습니다.</p>
 </blockquote>
@@ -314,24 +278,6 @@ created by net/http.(*Server).Serve
 <p>따라서, Word to Vector를 활용한 Audit Log 분석은 보안, 운영, 비즈니스 등 다양한 분야에서 유용하게 활용될 수 있는 기술입니다.</p>
 <hr>
 <h3 id="--더-나은-결과를-얻기-위한-향후-연구-방향-제시" style="position:relative;"><a href="#--%EB%8D%94-%EB%82%98%EC%9D%80-%EA%B2%B0%EA%B3%BC%EB%A5%BC-%EC%96%BB%EA%B8%B0-%EC%9C%84%ED%95%9C-%ED%96%A5%ED%9B%84-%EC%97%B0%EA%B5%AC-%EB%B0%A9%ED%96%A5-%EC%A0%9C%EC%8B%9C" aria-label="  더 나은 결과를 얻기 위한 향후 연구 방향 제시 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>- 더 나은 결과를 얻기 위한 향후 연구 방향 제시</h3>
-<p>http: panic serving 167.94.145.58:45318: runtime error: index out of range [0] with length 0
-goroutine 3490 [running]:
-net/http.(*conn).serve.func1()
-/usr/local/go/src/net/http/server.go:1854 +0xbf
-panic({0x12dcd40, 0xc000026108})
-/usr/local/go/src/runtime/panic.go:890 +0x263
-main.main.func1({0x0?, 0x3b?}, 0xc000192100)
-/Users/kakaobank/go/src/chat-blog-maker/main.go:34 +0x24d
-net/http.HandlerFunc.ServeHTTP(0xc0000ee180?, {0x1375e60?, 0xc0001980e0?}, 0x100cca8?)
-/usr/local/go/src/net/http/server.go:2122 +0x2f
-net/http.(*ServeMux).ServeHTTP(0x0?, {0x1375e60, 0xc0001980e0}, 0xc000192100)
-/usr/local/go/src/net/http/server.go:2500 +0x149
-net/http.serverHandler.ServeHTTP({0xc000180210?}, {0x1375e60, 0xc0001980e0}, 0xc000192100)
-/usr/local/go/src/net/http/server.go:2936 +0x316
-net/http.(*conn).serve(0xc0001a2090, {0x1376028, 0xc000098de0})
-/usr/local/go/src/net/http/server.go:1995 +0x612
-created by net/http.(*Server).Serve
-/usr/local/go/src/net/http/server.go:3089 +0x5ed</p>
 <blockquote>
 <p>Audit log word to vector 주제에 대한 향후 연구 방향은 다음과 같을 수 있습니다:</p>
 </blockquote>
@@ -368,24 +314,6 @@ created by net/http.(*Server).Serve
 <p>이러한 장점과 가능성을 통해 Word to Vector를 활용한 Audit Log 분석은 작업 기록의 내용을 보다 효과적으로 이해하고 활용할 수 있게 해줍니다.</p>
 <hr>
 <h3 id="--데이터-마이닝-분야에서의-word-to-vector의-중요성-강조" style="position:relative;"><a href="#--%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%A7%88%EC%9D%B4%EB%8B%9D-%EB%B6%84%EC%95%BC%EC%97%90%EC%84%9C%EC%9D%98-word-to-vector%EC%9D%98-%EC%A4%91%EC%9A%94%EC%84%B1-%EA%B0%95%EC%A1%B0" aria-label="  데이터 마이닝 분야에서의 word to vector의 중요성 강조 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>- 데이터 마이닝 분야에서의 Word to Vector의 중요성 강조</h3>
-<p>http: panic serving 45.95.147.254:56970: runtime error: index out of range [0] with length 0
-goroutine 3479 [running]:
-net/http.(*conn).serve.func1()
-/usr/local/go/src/net/http/server.go:1854 +0xbf
-panic({0x12dcd40, 0xc000258030})
-/usr/local/go/src/runtime/panic.go:890 +0x263
-main.main.func1({0x0?, 0x3b?}, 0xc00017e200)
-/Users/kakaobank/go/src/chat-blog-maker/main.go:34 +0x24d
-net/http.HandlerFunc.ServeHTTP(0xc0000ee200?, {0x1375e60?, 0xc0001980e0?}, 0x100cca8?)
-/usr/local/go/src/net/http/server.go:2122 +0x2f
-net/http.(*ServeMux).ServeHTTP(0x0?, {0x1375e60, 0xc0001980e0}, 0xc00017e200)
-/usr/local/go/src/net/http/server.go:2500 +0x149
-net/http.serverHandler.ServeHTTP({0xc0002ba090?}, {0x1375e60, 0xc0001980e0}, 0xc00017e200)
-/usr/local/go/src/net/http/server.go:2936 +0x316
-net/http.(*conn).serve(0xc0001a2090, {0x1376028, 0xc000098de0})
-/usr/local/go/src/net/http/server.go:1995 +0x612
-created by net/http.(*Server).Serve
-/usr/local/go/src/net/http/server.go:3089 +0x5ed</p>
 <blockquote>
 <p>Word to Vector는 자연어 처리 분야에서 매우 중요한 개념입니다. 이는 단어를 벡터로 변환하여 컴퓨터가 이해하고 처리할 수 있는 형태로 만들어주는 기술입니다.</p>
 </blockquote>

@@ -157,24 +157,6 @@
 </ol>
 <h2 id="-1-제로데이-취약점-소개" style="position:relative;"><a href="#-1-%EC%A0%9C%EB%A1%9C%EB%8D%B0%EC%9D%B4-%EC%B7%A8%EC%95%BD%EC%A0%90-%EC%86%8C%EA%B0%9C" aria-label=" 1 제로데이 취약점 소개 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>🔵 1. 제로데이 취약점 소개</h2>
 <h3 id="--제로데이-취약점의-정의와-의미" style="position:relative;"><a href="#--%EC%A0%9C%EB%A1%9C%EB%8D%B0%EC%9D%B4-%EC%B7%A8%EC%95%BD%EC%A0%90%EC%9D%98-%EC%A0%95%EC%9D%98%EC%99%80-%EC%9D%98%EB%AF%B8" aria-label="  제로데이 취약점의 정의와 의미 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>- 제로데이 취약점의 정의와 의미</h3>
-<p>http: panic serving 45.95.147.254:58784: runtime error: index out of range [0] with length 0
-goroutine 2545 [running]:
-net/http.(*conn).serve.func1()
-/usr/local/go/src/net/http/server.go:1854 +0xbf
-panic({0x12dcd40, 0xc000026150})
-/usr/local/go/src/runtime/panic.go:890 +0x263
-main.main.func1({0x0?, 0x3b?}, 0xc000194000)
-/Users/kakaobank/go/src/chat-blog-maker/main.go:34 +0x24d
-net/http.HandlerFunc.ServeHTTP(0xc000188200?, {0x1375e60?, 0xc00029e000?}, 0x100cca8?)
-/usr/local/go/src/net/http/server.go:2122 +0x2f
-net/http.(*ServeMux).ServeHTTP(0x0?, {0x1375e60, 0xc00029e000}, 0xc000194000)
-/usr/local/go/src/net/http/server.go:2500 +0x149
-net/http.serverHandler.ServeHTTP({0xc000180120?}, {0x1375e60, 0xc00029e000}, 0xc000194000)
-/usr/local/go/src/net/http/server.go:2936 +0x316
-net/http.(*conn).serve(0xc0001a2000, {0x1376028, 0xc000098de0})
-/usr/local/go/src/net/http/server.go:1995 +0x612
-created by net/http.(*Server).Serve
-/usr/local/go/src/net/http/server.go:3089 +0x5ed</p>
 <blockquote>
 <p>제로데이 취약점은 소프트웨어, 애플리케이션, 운영 체제 등의 보안 시스템에서 알려지지 않은 취약점을 의미합니다. 이 취약점은 제로데이로 불리는 이유는 보통 이러한 취약점에 대한 방어 또는 패치가 아직 존재하지 않아, 공격자가 이를 이용하여 시스템에 침투하고 악용할 수 있기 때문입니다. 제로데이 취약점은 악성 코드나 해킹 공격을 통해 개인 정보 유출, 데이터 변조, 서비스 중단 등의 피해를 입힐 수 있습니다. 따라서 제로데이 취약점은 보안 전문가들에 의해 신속하게 발견되고 조치되어야 합니다.</p>
 </blockquote>
@@ -314,24 +296,6 @@ created by net/http.(*Server).Serve
 </ol>
 <hr>
 <h3 id="--보안-업데이트-및-주의사항-등-개인의-참여-방법" style="position:relative;"><a href="#--%EB%B3%B4%EC%95%88-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8-%EB%B0%8F-%EC%A3%BC%EC%9D%98%EC%82%AC%ED%95%AD-%EB%93%B1-%EA%B0%9C%EC%9D%B8%EC%9D%98-%EC%B0%B8%EC%97%AC-%EB%B0%A9%EB%B2%95" aria-label="  보안 업데이트 및 주의사항 등 개인의 참여 방법 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>- 보안 업데이트 및 주의사항 등 개인의 참여 방법</h3>
-<p>http: panic serving 89.190.156.176:43040: runtime error: index out of range [0] with length 0
-goroutine 2621 [running]:
-net/http.(*conn).serve.func1()
-/usr/local/go/src/net/http/server.go:1854 +0xbf
-panic({0x12dcd40, 0xc0000b6090})
-/usr/local/go/src/runtime/panic.go:890 +0x263
-main.main.func1({0x0?, 0x3b?}, 0xc000156000)
-/Users/kakaobank/go/src/chat-blog-maker/main.go:34 +0x24d
-net/http.HandlerFunc.ServeHTTP(0xc0000ee080?, {0x1375e60?, 0xc0001980e0?}, 0x100cca8?)
-/usr/local/go/src/net/http/server.go:2122 +0x2f
-net/http.(*ServeMux).ServeHTTP(0x0?, {0x1375e60, 0xc0001980e0}, 0xc000156000)
-/usr/local/go/src/net/http/server.go:2500 +0x149
-net/http.serverHandler.ServeHTTP({0xc000098ea0?}, {0x1375e60, 0xc0001980e0}, 0xc000156000)
-/usr/local/go/src/net/http/server.go:2936 +0x316
-net/http.(*conn).serve(0xc000284090, {0x1376028, 0xc000098de0})
-/usr/local/go/src/net/http/server.go:1995 +0x612
-created by net/http.(*Server).Serve
-/usr/local/go/src/net/http/server.go:3089 +0x5ed</p>
 <blockquote>
 <p>제로데이 취약점은 소프트웨어나 하드웨어의 취약점으로, 이를 악용하는 사전 경고 없이 공개되거나 악용되는 취약점입니다. 이에 따라 개인들은 보안 업데이트를 통해 자신의 시스템이나 소프트웨어를 최신 상태로 유지하고, 주의사항을 준수하여 제로데이 취약점으로부터 보호할 수 있습니다.</p>
 </blockquote>
