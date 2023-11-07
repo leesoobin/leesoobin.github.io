@@ -95,7 +95,7 @@ Certificate authority(CA) 소스 : 외부 인증서 번들
 <p>앵커이름 : test <br>
 Certificate authority(CA) 소스 : 외부 인증서 번들 <br>
 외부 인증서 번들에는 1편에서 만든 lesstif-rootca.pem 파일 내용 복사 <br>
-test 트러스트 앵커의 세부정보에 <code class="language-text">트러스트 앵커 ARN</code> 내용 복사해두기 <br>
+test 트러스트 앵커의 세부정보에 <code class="language-text">트러스트 앵커 ARN</code> 내용 복사 <br>
 ex ) arn:aws:rolesanywhere:ap-northeast-2:testt123:trust-anchor/64438eff-ea71-449 <br></p>
 </blockquote>
 <p><span
@@ -128,7 +128,7 @@ ex ) arn:aws:rolesanywhere:ap-northeast-2:testt123:trust-anchor/64438eff-ea71-44
 <p>신뢰할수 있는 엔티티 유형 : AWS 서비스 <br>
 다른 AWS 서비스의 사용사례 : Roles Anywhere -> 다음<br>
 신뢰 할수 있는 엔티티 선택  내용에 아래와 같이 Condition 추가  <br>
-“aws:SourceArn” 은 위에 트러스트 앵커의 arn 복붙 <br></p>
+“aws:SourceArn” 은 위에 트러스트 앵커의 arn 복사붙여넣기 <br></p>
 </blockquote>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token punctuation">{</span>
     <span class="token string">"Version"</span><span class="token builtin class-name">:</span> <span class="token string">"2012-10-17"</span>,
@@ -161,7 +161,7 @@ ex ) arn:aws:rolesanywhere:ap-northeast-2:testt123:trust-anchor/64438eff-ea71-44
 <p>프로파일 이름 : test <br>
 역할은 4번에서 만든 test 로 선택 <br>
 나머지는 수정없이 프로파일 생성 <br>
-생성 이후 <code class="language-text">프로파일의 ARN</code> 복붙 <br></p>
+생성 이후 <code class="language-text">프로파일의 ARN</code> 복사붙여넣기 <br></p>
 </blockquote>
 <hr>
 <h3 id="️-6-aws_credential_helper로-credentials-생성" style="position:relative;"><a href="#%EF%B8%8F-6-aws_credential_helper%EB%A1%9C-credentials-%EC%83%9D%EC%84%B1" aria-label="️ 6 aws_credential_helper로 credentials 생성 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>⌨️ 6. aws_credential_helper로 credentials 생성</h3>
@@ -180,7 +180,7 @@ ex ) arn:aws:rolesanywhere:ap-northeast-2:testt123:trust-anchor/64438eff-ea71-44
       --profile-arn arn:aws:rolesanywhere:region:account:profile/PROFILE_ID <span class="token punctuation">\</span>
       --role-arn arn:aws:iam::account:role/role-name-with-path
 
-<span class="token comment"># 입력해서 성공하면 아래처럼 나옴 </span>
+<span class="token comment"># 입력해서 성공하면 아래처럼 나옵니다</span>
 <span class="token punctuation">{</span><span class="token string">"Version"</span>:1,<span class="token string">"AccessKeyId"</span><span class="token builtin class-name">:</span><span class="token string">"ASIAXNQ~~~~~CYZL"</span>,<span class="token string">"SecretAccessKey"</span><span class="token builtin class-name">:</span><span class="token string">"N7LWW~~~~~~~igU6PR67dFylHSHoAt"</span>,
 <span class="token string">"SessionToken"</span>:"IQoJb3JpZ2luX2VjEIf//////////wEaDmFwLW5vcnRoZWFzdC0yIkgwRgIhAOwy+O9Tz+x7FfztORGHC03BLE4E
 +vclwgP830gUmQt6AiEAtIq+vgzKNQhlC2o9bXsyWZuKqzbJoEXr4oKYP9qMrq8qvwMIwf//////////
@@ -188,11 +188,11 @@ ARADGgw1MTAwODczNjU2OTAiDI4vmdEDEQ/nThQwWSqTAxkMG2/
 4bhgxXPy73aQxj49fujBbx5FLZmp57Ufl461J0UCGgAIKo1m7nyKm8YQZ6vIcz3uG1BJFSKg78IABKkjzUbSkr2bM/zap
 +Ykk66R9SnoPao75j0t1fkShwoqqy8JAg20r7ikLRt3yLXXLLVP6UY~<span class="token punctuation">}</span></code></pre></div>
 <hr>
-<h3 id="️-7-aws-cli-설치-및-명령어-사용-해보기" style="position:relative;"><a href="#%EF%B8%8F-7-aws-cli-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%82%AC%EC%9A%A9-%ED%95%B4%EB%B3%B4%EA%B8%B0" aria-label="️ 7 aws cli 설치 및 명령어 사용 해보기 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>⌨️ 7. aws cli 설치 및 명령어 사용 해보기</h3>
+<h3 id="️-7-aws-cli-설치-및-명령어-사용-하기" style="position:relative;"><a href="#%EF%B8%8F-7-aws-cli-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%82%AC%EC%9A%A9-%ED%95%98%EA%B8%B0" aria-label="️ 7 aws cli 설치 및 명령어 사용 하기 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>⌨️ 7. aws cli 설치 및 명령어 사용 하기</h3>
 <blockquote>
 <p><a href="https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/getting-started-install.html">https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/getting-started-install.html</a>
 본인에게 해당되는 OS로 설치
-MacOS는 terminal 에서 aws 명령어 쳐러 아래처럼 나오면 성공</p>
+MacOS는 terminal 에서 aws 명령어 쳐러 아래처럼 나오면 성공입니다</p>
 </blockquote>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">usage: aws <span class="token punctuation">[</span>options<span class="token punctuation">]</span> <span class="token operator">&lt;</span>command<span class="token operator">></span> <span class="token operator">&lt;</span>subcommand<span class="token operator">></span> <span class="token punctuation">[</span><span class="token operator">&lt;</span>subcommand<span class="token operator">></span> <span class="token punctuation">..</span>.<span class="token punctuation">]</span> <span class="token punctuation">[</span>parameters<span class="token punctuation">]</span>
 To see <span class="token builtin class-name">help</span> text, you can run:
@@ -220,7 +220,7 @@ aws: error: the following arguments are required: <span class="token builtin cla
 <li><a href="#%EF%B8%8F-4-role-%EC%83%9D%EC%84%B1">⌨️ 4. role 생성</a></li>
 <li><a href="#%EF%B8%8F-5-profile-%EC%83%9D%EC%84%B1">⌨️ 5. profile 생성</a></li>
 <li><a href="#%EF%B8%8F-6-aws_credential_helper%EB%A1%9C-credentials-%EC%83%9D%EC%84%B1">⌨️ 6. aws_credential_helper로 credentials 생성</a></li>
-<li><a href="#%EF%B8%8F-7-aws-cli-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%82%AC%EC%9A%A9-%ED%95%B4%EB%B3%B4%EA%B8%B0">⌨️ 7. aws cli 설치 및 명령어 사용 해보기</a></li>
+<li><a href="#%EF%B8%8F-7-aws-cli-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%82%AC%EC%9A%A9-%ED%95%98%EA%B8%B0">⌨️ 7. aws cli 설치 및 명령어 사용 하기</a></li>
 <li><a href="#%EF%B8%8F-8-aws-cli%EB%A1%9C-ec2-%EC%A0%95%EB%B3%B4-%EA%B0%80%EC%A0%B8%EC%99%80%EB%B3%B4%EA%B8%B0">⌨️ 8. aws cli로 ec2 정보 가져와보기</a></li>
 <li><a href="#%EC%B0%B8%EA%B3%A0%EC%82%AC%EC%9D%B4%ED%8A%B8">참고사이트</a></li>
 </ul>
